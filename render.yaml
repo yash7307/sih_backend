@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sih-backend
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: MONGODB_URI
+        sync: false
+      - key: PORT
+        value: 10000
