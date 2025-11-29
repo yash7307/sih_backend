@@ -13,3 +13,9 @@ services:
         sync: false
       - key: PORT
         value: 10000
+      - key: CLOUD_NAME
+        value: dsf0yp2hr
+      - key: CLOUD_API_KEY
+        value: 563713949862699
+      - key: CLOUD_API_SECRET
+        value: d_HSX5dQCyDnZaCWltF0SNyDVwk
