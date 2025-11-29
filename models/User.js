@@ -13,14 +13,25 @@ const userSchema = new mongoose.Schema(
     mobile: String,
     alternativeMobile: String,
 
-    // Address
-    permAddress: String,
-    permDistrict: String,
+    // Permanent Address
+    permHouse: String,
+    permLine1: String,
+    permLine2: String,
     permState: String,
+    permDistrict: String,
+    permBlock: String,
+    permVillage: String,
     permPincode: String,
-    corrAddress: String,
-    corrDistrict: String,
+
+    // Correspondence Address
+    corrSame: Boolean,
+    corrHouse: String,
+    corrLine1: String,
+    corrLine2: String,
     corrState: String,
+    corrDistrict: String,
+    corrBlock: String,
+    corrVillage: String,
     corrPincode: String,
 
     // Education
