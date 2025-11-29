@@ -2,13 +2,20 @@ const User = require("../models/User");
 
 exports.saveUser = async (req, res) => {
     try {
+        console.log("Received Body:", req.body);
+        console.log("Received Files:", req.files);
+
         const userData = req.body;
 
         // Parse JSON strings if coming from FormData
-        if (typeof userData.educationList === 'string') userData.educationList = JSON.parse(userData.educationList);
-        if (typeof userData.experienceList === 'string') userData.experienceList = JSON.parse(userData.experienceList);
-        if (typeof userData.skills === 'string') userData.skills = JSON.parse(userData.skills);
-        if (typeof userData.documents === 'string') userData.documents = JSON.parse(userData.documents);
+        try {
+            if (typeof userData.educationList === 'string') userData.educationList = JSON.parse(userData.educationList);
+            if (typeof userData.experienceList === 'string') userData.experienceList = JSON.parse(userData.experienceList);
+            if (typeof userData.skills === 'string') userData.skills = JSON.parse(userData.skills);
+            if (typeof userData.documents === 'string') userData.documents = JSON.parse(userData.documents);
+        } catch (e) {
+            console.error("JSON Parse Error:", e);
+        }
 
         // Handle uploaded files (Cloudinary URLs)
         if (req.files) {
@@ -53,7 +60,15 @@ exports.saveUser = async (req, res) => {
 
         const user = new User(userData);
         await user.save();
-        res.json({ success: true, message: "User saved successfully!", user });
+        res.json({
+            success: true,
+            message: "User saved successfully!",
+            user,
+            debug: {
+                filesReceived: req.files ? Object.keys(req.files) : [],
+                bodyKeys: Object.keys(req.body)
+            }
+        });
     } catch (error) {
         console.error("Error saving user:", error);
         res.status(500).json({ error: "Error saving user", details: error.message });
