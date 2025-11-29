@@ -54,8 +54,8 @@ const userSchema = new mongoose.Schema(
 
     // Documents
     documents: {
-      aadhar: Object, // { name, type, size, data }
-      photo: Object   // { name, type, size, data }
+      aadhar: { url: String, name: String },
+      photo: { url: String, name: String }
     },
 
     // Experience
