@@ -4,9 +4,11 @@ const cloudinary = require("../config/cloudinary");
 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    params: {
-        folder: "sih_uploads",
-        allowed_formats: ["jpg", "png", "jpeg", "pdf"],
+    params: async (req, file) => {
+        return {
+            folder: "sih_uploads",
+            resource_type: "auto",
+        };
     },
 });
 
